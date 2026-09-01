@@ -60,9 +60,11 @@ h2 {
   font-size: 1.15rem;
 }
 
-p, li { color: var(--fg); }
+p, li { color: var(--fg); overflow-wrap: anywhere; }
 
 p { margin: 0 0 1rem; }
+
+a { color: var(--link); overflow-wrap: anywhere; }
 
 ul {
   margin: 0 0 1rem;
@@ -71,7 +73,6 @@ ul {
 
 .meta, .muted { color: var(--muted); }
 
-a { color: var(--link); }
 
 nav {
   display: flex;
