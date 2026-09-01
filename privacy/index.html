@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — Agent Guild</title>
+  <meta name="description" content="Privacy policy for the Agent Guild iOS app.">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <main>
+    <header>
+      <p class="kicker">Agent Guild</p>
+      <h1>Privacy Policy</h1>
+      <p class="meta">Effective date: August 16, 2026</p>
+      <nav aria-label="Legal pages">
+        <a href="../">Home</a>
+        <a href="./" aria-current="page">Privacy</a>
+        <a href="../support/">Support</a>
+      </nav>
+    </header>
+
+    <p>Agent Guild is a native iOS client for an official Hermes Agent dashboard that you choose and control. The app does not provide a hosted Hermes service or create an account with the app developer.</p>
+
+    <h2>Data collection</h2>
+    <p>Agent Guild does not include advertising, third-party analytics, or cross-app tracking. The developer does not receive your prompts, conversations, credentials, files, audio, or usage data through the app.</p>
+
+    <h2>Your Hermes server</h2>
+    <p>You provide the URL and authentication method for your Hermes dashboard. Agent Guild sends requests directly to that server to provide chat, session history, files, audio, tasks, skills, settings, Git, cron, Kanban, and related Hermes features. Content you submit—including prompts, selected files, photos, shared items, and recorded audio—is sent to that configured server when needed for the action you request.</p>
+    <p>The server operator controls server-side processing, storage, retention, and deletion. If you connect to a server operated by somebody else, their privacy practices apply to data handled by that server.</p>
+
+    <h2>Authentication and local storage</h2>
+    <p>Server URLs, session tokens, OAuth token pairs, credential mode, and per-server custom headers are stored in the iOS Keychain. App preferences are stored on the device. Recent session and message data may be cached locally so the app can show a bounded offline view. You can clear local cached data from the app; clearing it does not delete server-side data.</p>
+    <p>Native OAuth uses Apple's system authentication session. Agent Guild validates the OAuth state and PKCE exchange and stores the resulting tokens in Keychain. The app does not send those tokens to the developer.</p>
+
+    <h2>Photos, files, sharing, microphone, and speech</h2>
+    <p>Agent Guild accesses photos, files, the share sheet, microphone, or speech features only when you invoke the related feature and grant iOS permission. Shared content may be staged temporarily in the app's private App Group container so the main app can load it. Selected content is sent only to your configured Hermes server as part of the action you request.</p>
+
+    <h2>Notifications and Live Activities</h2>
+    <p>Local notifications and Live Activities may show run status and other session information on the Lock Screen or Dynamic Island, depending on your app and iOS settings. iOS notification previews can be hidden in system settings.</p>
+
+    <h2>Links and remote media</h2>
+    <p>Tapping a link opens its destination through iOS. Content returned by your Hermes server may contain remote image or media URLs; displaying that content can contact the host named by the URL. Those hosts are not operated by Agent Guild unless explicitly stated.</p>
+
+    <h2>Third-party libraries</h2>
+    <p>Agent Guild uses open-source libraries for interface rendering, networking support, syntax highlighting, mathematics, and Keychain access. The app does not intentionally include advertising or analytics SDKs.</p>
+
+    <h2>Children</h2>
+    <p>Agent Guild is not directed to children under 13, and the developer does not knowingly collect children's personal information through the app.</p>
+
+    <h2>Changes</h2>
+    <p>This policy may be updated when app behavior changes. The effective date above identifies the current version.</p>
+
+    <h2>Contact and support</h2>
+    <p>Questions, privacy requests, and support reports can be filed on the public Support page:</p>
+    <p><a href="https://ildunari.github.io/agent-guild-legal/support/">https://ildunari.github.io/agent-guild-legal/support/</a></p>
+
+    <footer>
+      <p>Guild is the in-app name. Agent Guild is the App Store and home-screen name.</p>
+    </footer>
+  </main>
+</body>
+</html>
