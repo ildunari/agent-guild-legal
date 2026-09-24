@@ -12,7 +12,7 @@
     <header>
       <p class="kicker">Agent Guild</p>
       <h1>Privacy Policy</h1>
-      <p class="meta">Effective date: August 16, 2026</p>
+      <p class="meta">Effective date: September 24, 2026</p>
       <nav aria-label="Legal pages">
         <a href="../">Home</a>
         <a href="./" aria-current="page">Privacy</a>
@@ -23,36 +23,88 @@
     <p>Agent Guild is a native iOS client for an official Hermes Agent dashboard that you choose and control. The app does not provide a hosted Hermes service or create an account with the app developer.</p>
 
     <h2>Data collection</h2>
-    <p>Agent Guild does not include advertising, third-party analytics, or cross-app tracking. The developer does not receive your prompts, conversations, credentials, files, audio, or usage data through the app.</p>
+
+    <p>Agent Guild does not include advertising, third-party analytics, or cross-app tracking. The developer does not receive your prompts, conversations, credentials, files, audio, push tokens, diagnostics, or usage data through the app. The app has no developer-run server; it talks to the Hermes server you configure, to Apple services, and to hosts named in links and media as described below.</p>
 
     <h2>Your Hermes server</h2>
+
     <p>You provide the URL and authentication method for your Hermes dashboard. Agent Guild sends requests directly to that server to provide chat, session history, files, audio, tasks, skills, settings, Git, cron, Kanban, and related Hermes features. Content you submit—including prompts, selected files, photos, shared items, and recorded audio—is sent to that configured server when needed for the action you request.</p>
+
+    <p>Some features send content to that server so the server can do the work:</p>
+
+    <ul>
+      <li><strong>Dictation.</strong> By default, the audio you dictate is uploaded to your Hermes server for transcription, and the temporary recording is then deleted from the device. If server speech-to-text is not available, the app uses Apple's on-device speech recognition instead. Choose "On-device only" under the Dictation Provider setting to keep dictation audio off your server.</li>
+      <li><strong>Local network.</strong> If your Hermes server is on your home or office network, iOS asks for Local Network permission. The app uses it to reach the servers you add.</li>
+      <li><strong>Voice notes.</strong> A voice note you record is first sent to your Hermes server to be transcribed, then uploaded to it as a chat attachment alongside the transcript. If transcription fails, the voice note is not sent to the chat, but your server has already received the recording.</li>
+      <li><strong>Listen.</strong> When you tap Listen on a message, its text is sent to your Hermes server to be turned into speech. Your server may pass that text to the speech service it is configured to use. If the server cannot do it, the app speaks the text with Apple's on-device voice instead.</li>
+    </ul>
+
     <p>The server operator controls server-side processing, storage, retention, and deletion. If you connect to a server operated by somebody else, their privacy practices apply to data handled by that server.</p>
 
     <h2>Authentication and local storage</h2>
+
     <p>Server URLs, session tokens, OAuth token pairs, credential mode, and per-server custom headers are stored in the iOS Keychain. App preferences are stored on the device. Recent session and message data may be cached locally so the app can show a bounded offline view. You can clear local cached data from the app; clearing it does not delete server-side data.</p>
+
+    <p>The app also keeps a short list of your Hermes profiles (each profile's identifier, display name, and the model and provider it uses) in its private App Group container so Siri and the Shortcuts app can offer them without contacting the server.</p>
+
     <p>Native OAuth uses Apple's system authentication session. Agent Guild validates the OAuth state and PKCE exchange and stores the resulting tokens in Keychain. The app does not send those tokens to the developer.</p>
 
     <h2>Photos, files, sharing, microphone, and speech</h2>
+
     <p>Agent Guild accesses photos, files, the share sheet, microphone, or speech features only when you invoke the related feature and grant iOS permission. Shared content may be staged temporarily in the app's private App Group container so the main app can load it. Selected content is sent only to your configured Hermes server as part of the action you request.</p>
 
     <h2>Notifications and Live Activities</h2>
-    <p>Local notifications and Live Activities may show run status and other session information on the Lock Screen or Dynamic Island, depending on your app and iOS settings. iOS notification previews can be hidden in system settings.</p>
+
+    <p>Local notifications and Live Activities may show run status and other session information on the Lock Screen or Dynamic Island, depending on your app and iOS settings. iOS notification previews can be hidden in system settings. Live Activities are updated by the app on the device, not through Apple's push service.</p>
+
+    <h3>Push notifications for Bot Mode</h3>
+
+    <p>After the app connects to a Hermes server, it registers the device with Apple Push Notification service (APNs) and receives a device token from Apple. For each profile on that server that is set up for Bot Mode, the app writes a small record into that profile's configuration on your server. The record holds:</p>
+
+    <ul>
+      <li>the APNs device token,</li>
+      <li>whether the token is for Apple's development or production push environment,</li>
+      <li>the time it was registered, and</li>
+      <li>the app's build number.</li>
+    </ul>
+
+    <p>Nothing is written for profiles that are not set up for Bot Mode. The record is stored only on your Hermes server; it is not sent to the developer. A server-side component run by the server's operator can use it to send notifications to this device through Apple's push service, and the content of those notifications passes through Apple to reach the device. Signing out of the app stops further registrations but does not delete records already written; the server operator can remove them from the profile configuration.</p>
 
     <h2>Links and remote media</h2>
-    <p>Tapping a link opens its destination through iOS. Content returned by your Hermes server may contain remote image or media URLs; displaying that content can contact the host named by the URL. Those hosts are not operated by Agent Guild unless explicitly stated.</p>
+
+    <p>Tapping a link opens its destination through iOS. Content returned by your Hermes server may contain remote image or media URLs; displaying that content can contact the host named by the URL.</p>
+
+    <p>Previews load only for links to your own Hermes server. When a finished message you sent or received links to the server you configured (the same address and port), the app loads that page from your server to show its title and image. If your server redirects that request anywhere else, for example to a sign-in page on another site, the app stops and shows no preview, and an image hosted on another site is not loaded. Links to any other site, including devices on your local network, are shown as plain links: the app does not contact them unless you tap one. The app keeps previews in memory only and does not save them to disk.</p>
+
+    <p>Those hosts are not operated by Agent Guild unless explicitly stated.</p>
+
+    <h2>Diagnostics and performance records</h2>
+
+    <p>The app keeps diagnostic records on the device to help investigate slowness and crashes:</p>
+
+    <ul>
+      <li><strong>Performance records.</strong> Timing events about app activity (for example, how long a chat took to open or a request took to answer) are stored in the app's private storage. Records older than 14 days are deleted, and the store is capped at 200 MB.</li>
+      <li><strong>MetricKit reports.</strong> If iOS delivers performance and diagnostic reports to the app through Apple's MetricKit framework, the app stores them in its private storage. Reports older than 30 days are deleted, and the store is capped at 100 MB.</li>
+    </ul>
+
+    <p>These records stay on the device. They leave it only if you export them from Settings &gt; Diagnostics &gt; Performance and choose where to send the file with the iOS share sheet. The exported file is limited to an allowlist. It contains the individual timing events, each with its category, name and phase, the date and time it happened, the time since the device started, and random identifiers for the app run and, for some events, for the user action it belongs to. An event can also carry a few allowlisted details: the server route template (with identifiers replaced by a placeholder and no query text), the request method, HTTP status and error codes, byte counts and durations, the sign-in method in use (token or ticket), and the network type (for example Wi-Fi or cellular). The most recent events of each app run are repeated in a per-run summary. The file also contains your app version and build; your iOS version and device model (for example, "iPhone"); and the MetricKit reports described above, including crash and hang call stacks reduced to binary names, binary UUIDs, and numeric memory addresses. It leaves out message content, exception text, and device identifiers such as the advertising identifier or serial number. You can clear the records from the same screen. Separately from the app, iOS may share crash and usage data with app developers through Apple if you turned on "Share With App Developers" in iOS settings; that sharing is controlled by iOS, not by Agent Guild.</p>
 
     <h2>Third-party libraries</h2>
+
     <p>Agent Guild uses open-source libraries for interface rendering, networking support, syntax highlighting, mathematics, and Keychain access. The app does not intentionally include advertising or analytics SDKs.</p>
 
     <h2>Children</h2>
+
     <p>Agent Guild is not directed to children under 13, and the developer does not knowingly collect children's personal information through the app.</p>
 
     <h2>Changes</h2>
+
     <p>This policy may be updated when app behavior changes. The effective date above identifies the current version.</p>
 
     <h2>Contact and support</h2>
-    <p>Questions, privacy requests, and support reports can be filed on the public Support page:</p>
+
+    <p>Questions, privacy requests, and support reports can be filed at:</p>
+
     <p><a href="https://ildunari.github.io/agent-guild-legal/support/">https://ildunari.github.io/agent-guild-legal/support/</a></p>
 
     <footer>
